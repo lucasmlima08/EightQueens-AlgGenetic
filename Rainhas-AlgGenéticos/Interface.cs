@@ -32,8 +32,6 @@ namespace Rainhas_AlgGenéticos
                              n81, n82, n83, n84, n85, n86, n87, n88 };
         }
 
-        //private Label[] matriz = {n11,n12,n13,n14,n15,n16,n17,n18};
-
         private void construirSolucao(String rainha)
         {
             int posRainha = 0;

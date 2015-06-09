@@ -32,8 +32,6 @@ namespace Rainhas_AlgGenéticos
                              n81, n82, n83, n84, n85, n86, n87, n88 };
         }
 
-        //private Label[] matriz = {n11,n12,n13,n14,n15,n16,n17,n18};
-
         private void construirSolucao(String rainha)
         {
             int posRainha = 0;
@@ -125,6 +123,7 @@ namespace Rainhas_AlgGenéticos
                     resetarMatrizSolucao("?");
                     interacoesFinal.Text = "" + Metodos.maxInteracoes;
                     solucaoEncontrada.Text = "Nenhuma";
+                    familias.Text = "Nenhuma";
                 }
             }
         }
@@ -138,9 +137,10 @@ namespace Rainhas_AlgGenéticos
             prob3.Text = "0.50";
             inter3.Text = "2000";
             reset.Text = "5000";
-            maxInteracoes.Text = "200000";
+            maxInteracoes.Text = "300000";
             interacoesFinal.Text = "";
             solucaoEncontrada.Text = "";
+            familias.Text = "";
             resetarMatrizSolucao("-");
         }
 

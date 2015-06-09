@@ -1138,7 +1138,7 @@
             this.maxInteracoes.Name = "maxInteracoes";
             this.maxInteracoes.Size = new System.Drawing.Size(100, 20);
             this.maxInteracoes.TabIndex = 26;
-            this.maxInteracoes.Text = "200000";
+            this.maxInteracoes.Text = "300000";
             this.maxInteracoes.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label77

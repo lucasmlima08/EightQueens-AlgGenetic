@@ -35,11 +35,13 @@ namespace Rainhas_AlgGenéticos
 
         public static int reset = 0;
 
+        private static List<String> populacao;
+
         /* Inicia a busca pela solução das 8 rainhas a partir de um algoritmo genético */
         public static void iniciarInteracoes()
         {
             // Sorteia a primeira população com 10 indivíduos.
-            List<String> populacao = new List<String>();
+            populacao = new List<String>();
             populacao = sortearPopulacao(populacao);
 
             // Percorre o número máximo de interações.
@@ -62,7 +64,7 @@ namespace Rainhas_AlgGenéticos
                     melhorFitness = fitness;
                     melhorIndividuo = melhorIndividuoPopulacao;
                     probabilidadeAtual = probabilidade_1;
-                    numInteracoesAux = 0;
+                    //numInteracoesAux = 0;
                 }
 
                 // Condições de probabilidades de mutação a partir do número de interações escolhidas.
@@ -117,10 +119,8 @@ namespace Rainhas_AlgGenéticos
             }
 
             // Agora adiciona os 2 melhores indivíduos da população anterior.
-            // Cria o array dos dois melhores e suas posições.
-            int[] posMelhores = new int[]{0,1};
-            int[] fitnessMelhores = new int[]{getFitness(populacao[0]),getFitness(populacao[1])};
-            // Em seguida vai trocando sempre que encontra um melhor do que os dois.
+            int[] posMelhores = new int[]{ 0, 1 };
+            int[] fitnessMelhores = new int[] { getFitness(populacao[0]), getFitness(populacao[1]) };
             for (int i = 2; i < populacao.Count; i++)
             {
                 int fitness = getFitness(populacao[i]);
@@ -141,25 +141,55 @@ namespace Rainhas_AlgGenéticos
                     }
                 }
             }
-
-            // Agora, enfim, seleciona o melhor da nova população.
-            // Primeiro guarda os fitness da nova população.
+            
+            // Guarda os fitness da nova população.
             int[] arrayFitness = new int[novaPopulacao.Count];
+            int maiorFitness = getFitness(novaPopulacao[0]);
             for (int i = 0; i < novaPopulacao.Count; i++)
                 arrayFitness[i] = getFitness(novaPopulacao[i]);
+
             // Depois compara os fitness para escolher o melhor.
+            // E ao mesmo tempo procura os 2 piores para remover.
             int fitness_melhor = arrayFitness[0];
             int pos_melhor = 0;
+            int[] fitnessPiores = new int[] { arrayFitness[0], arrayFitness[1] };
+            int[] posPiores = new int[] { 0, 1 };
             for (int i = 1; i < arrayFitness.Length; i++)
             {
+                // Busca o melhor
                 if (arrayFitness[i] > fitness_melhor)
                 {
                     fitness_melhor = arrayFitness[i];
                     pos_melhor = i;
                 }
+                // Busca os piores.
+                if (fitnessPiores[0] < fitnessPiores[1])
+                {
+                    if (arrayFitness[i] < fitnessPiores[0])
+                    {
+                        fitnessPiores[0] = arrayFitness[i];
+                        posPiores[0] = i;
+                    }
+                }
+                else
+                {
+                    if (arrayFitness[i] < fitnessPiores[1])
+                    {
+                        fitnessPiores[1] = arrayFitness[i];
+                        posPiores[1] = i;
+                    }
+                }
             }
-
+            // Pega o melhor indivíduo da nova população.
             String melhor = novaPopulacao[pos_melhor];
+            // Remove os 2 piores (maior indice primeiro).
+            if (posPiores[0] > posPiores[1])
+                novaPopulacao.RemoveAt(posPiores[0]);
+            else
+                novaPopulacao.RemoveAt(posPiores[1]);
+            // A população atual passa a ser a nova população.
+            populacao = novaPopulacao;
+            // Retorna o melhor indivíduo.
             return melhor;
         }
 

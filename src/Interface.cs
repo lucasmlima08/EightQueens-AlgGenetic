@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Rainhas_AlgGenéticos
+namespace OitoRainhasAlgoritmosGeneticos
 {
     public partial class Interface : Form
     {
@@ -19,6 +19,7 @@ namespace Rainhas_AlgGenéticos
         }
 
         private Label[] matriz;
+        private Metodos metodos = new Metodos();
 
         private void construirMatriz()
         {
@@ -36,9 +37,9 @@ namespace Rainhas_AlgGenéticos
         {
             int posRainha = 0;
             int posMatriz = 0;
-            for (int i=0; i < rainha.Length; i++)
+            for (int i = 0; i < rainha.Length; i++)
             {
-                posRainha = (int) Char.GetNumericValue(rainha[i]);
+                posRainha = (int)Char.GetNumericValue(rainha[i]);
                 posMatriz = ((posRainha - 1) * 8) + i;
                 matriz[posMatriz].Text = "X";
             }
@@ -46,7 +47,7 @@ namespace Rainhas_AlgGenéticos
 
         private void resetarMatrizSolucao(String caracter)
         {
-            for (int i=0; i < matriz.Length; i++)
+            for (int i = 0; i < matriz.Length; i++)
             {
                 matriz[i].Text = caracter;
             }
@@ -56,29 +57,29 @@ namespace Rainhas_AlgGenéticos
         {
             try
             {
-                Metodos.probabilidade_1 = float.Parse(prob1.Text, System.Globalization.CultureInfo.InvariantCulture);
-                Metodos.numInteracoes_1 = Convert.ToInt32(inter1.Text);
+                metodos.probabilidade_1 = float.Parse(prob1.Text, System.Globalization.CultureInfo.InvariantCulture);
+                metodos.numInteracoes_1 = Convert.ToInt32(inter1.Text);
 
-                Metodos.probabilidade_2 = float.Parse(prob2.Text, System.Globalization.CultureInfo.InvariantCulture);
-                Metodos.numInteracoes_2 = Convert.ToInt32(inter2.Text);
+                metodos.probabilidade_2 = float.Parse(prob2.Text, System.Globalization.CultureInfo.InvariantCulture);
+                metodos.numInteracoes_2 = Convert.ToInt32(inter2.Text);
 
-                Metodos.probabilidade_3 = float.Parse(prob3.Text, System.Globalization.CultureInfo.InvariantCulture);
-                Metodos.numInteracoes_3 = Convert.ToInt32(inter3.Text);
+                metodos.probabilidade_3 = float.Parse(prob3.Text, System.Globalization.CultureInfo.InvariantCulture);
+                metodos.numInteracoes_3 = Convert.ToInt32(inter3.Text);
 
-                Metodos.reset = Convert.ToInt32(reset.Text);
+                metodos.reset = Convert.ToInt32(reset.Text);
 
-                Metodos.maxInteracoes = Convert.ToInt32(maxInteracoes.Text);
+                metodos.maxInteracoes = Convert.ToInt32(maxInteracoes.Text);
 
-                Metodos.interacoes = 0;
-                Metodos.numInteracoesAux = 0;
-                Metodos.melhorFitness = 0;
-                Metodos.solucao = "";
-                Metodos.encontrouSolucao = false;
+                metodos.interacoes = 0;
+                metodos.numInteracoesAux = 0;
+                metodos.melhorFitness = 0;
+                metodos.solucao = "";
+                metodos.encontrouSolucao = false;
 
-                if ((0 <= Metodos.probabilidade_1) && (Metodos.probabilidade_3 < 1) &&
-                    (Metodos.probabilidade_1 <= Metodos.probabilidade_2) && (Metodos.probabilidade_2 <= Metodos.probabilidade_3) &&
-                    (Metodos.numInteracoes_1 <= Metodos.numInteracoes_2) && (Metodos.numInteracoes_2 <= Metodos.numInteracoes_3) &&
-                    (-1 < Metodos.numInteracoes_1) && (Metodos.numInteracoes_3 < Metodos.reset) && (Metodos.reset < Metodos.maxInteracoes))
+                if ((0 <= metodos.probabilidade_1) && (metodos.probabilidade_3 < 1) &&
+                    (metodos.probabilidade_1 <= metodos.probabilidade_2) && (metodos.probabilidade_2 <= metodos.probabilidade_3) &&
+                    (metodos.numInteracoes_1 <= metodos.numInteracoes_2) && (metodos.numInteracoes_2 <= metodos.numInteracoes_3) &&
+                    (-1 < metodos.numInteracoes_1) && (metodos.numInteracoes_3 < metodos.reset) && (metodos.reset < metodos.maxInteracoes))
                 {
                     return true;
                 }
@@ -94,7 +95,7 @@ namespace Rainhas_AlgGenéticos
                 }
                 return false;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 MessageBox.Show("" + e.Message, "Opa! Houve um erro..", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
@@ -105,23 +106,19 @@ namespace Rainhas_AlgGenéticos
         {
             if (condicoesDeAceitacao())
             {
-                Metodos.iniciarInteracoes();
+                metodos.iniciarInteracoes();
 
-                if (Metodos.encontrouSolucao == true)
+                if (metodos.encontrouSolucao == true)
                 {
                     resetarMatrizSolucao("-");
-                    construirSolucao(Metodos.solucao);
-                    interacoesFinal.Text = "" + Metodos.interacoes;
-                    solucaoEncontrada.Text = Metodos.solucao;
-                    if (Metodos.interacoes < Metodos.reset)
-                        familias.Text = "" + Metodos.interacoes;
-                    else
-                        familias.Text = "" + (Metodos.interacoes % Metodos.reset);
+                    construirSolucao(metodos.solucao);
+                    interacoesFinal.Text = "" + metodos.interacoes;
+                    solucaoEncontrada.Text = metodos.solucao;
                 }
                 else
                 {
                     resetarMatrizSolucao("?");
-                    interacoesFinal.Text = "" + Metodos.maxInteracoes;
+                    interacoesFinal.Text = "" + metodos.maxInteracoes;
                     solucaoEncontrada.Text = "Nenhuma";
                 }
             }
@@ -136,7 +133,7 @@ namespace Rainhas_AlgGenéticos
             prob3.Text = "0.50";
             inter3.Text = "2000";
             reset.Text = "5000";
-            maxInteracoes.Text = "200000";
+            maxInteracoes.Text = "100000";
             interacoesFinal.Text = "";
             solucaoEncontrada.Text = "";
             resetarMatrizSolucao("-");

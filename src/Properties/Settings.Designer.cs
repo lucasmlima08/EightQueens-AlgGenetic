@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Rainhas_AlgGenéticos.Properties
+namespace OitoRainhasAlgoritmosGeneticos.Properties
 {
 
 

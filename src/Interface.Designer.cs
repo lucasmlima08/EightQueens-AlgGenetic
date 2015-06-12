@@ -1,4 +1,4 @@
-﻿namespace Rainhas_AlgGenéticos
+﻿namespace OitoRainhasAlgoritmosGeneticos
 {
     partial class Interface
     {
@@ -118,8 +118,6 @@
             this.label76 = new System.Windows.Forms.Label();
             this.maxInteracoes = new System.Windows.Forms.TextBox();
             this.label77 = new System.Windows.Forms.Label();
-            this.familias = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -1099,7 +1097,7 @@
             this.label75.AutoSize = true;
             this.label75.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label75.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label75.Location = new System.Drawing.Point(318, 303);
+            this.label75.Location = new System.Drawing.Point(326, 328);
             this.label75.Name = "label75";
             this.label75.Size = new System.Drawing.Size(134, 17);
             this.label75.TabIndex = 21;
@@ -1107,7 +1105,7 @@
             // 
             // interacoesFinal
             // 
-            this.interacoesFinal.Location = new System.Drawing.Point(336, 328);
+            this.interacoesFinal.Location = new System.Drawing.Point(344, 353);
             this.interacoesFinal.Name = "interacoesFinal";
             this.interacoesFinal.Size = new System.Drawing.Size(100, 20);
             this.interacoesFinal.TabIndex = 22;
@@ -1115,7 +1113,7 @@
             // 
             // solucaoEncontrada
             // 
-            this.solucaoEncontrada.Location = new System.Drawing.Point(336, 386);
+            this.solucaoEncontrada.Location = new System.Drawing.Point(344, 428);
             this.solucaoEncontrada.Name = "solucaoEncontrada";
             this.solucaoEncontrada.Size = new System.Drawing.Size(100, 20);
             this.solucaoEncontrada.TabIndex = 24;
@@ -1126,7 +1124,7 @@
             this.label76.AutoSize = true;
             this.label76.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label76.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label76.Location = new System.Drawing.Point(318, 361);
+            this.label76.Location = new System.Drawing.Point(326, 403);
             this.label76.Name = "label76";
             this.label76.Size = new System.Drawing.Size(140, 17);
             this.label76.TabIndex = 23;
@@ -1138,7 +1136,7 @@
             this.maxInteracoes.Name = "maxInteracoes";
             this.maxInteracoes.Size = new System.Drawing.Size(100, 20);
             this.maxInteracoes.TabIndex = 26;
-            this.maxInteracoes.Text = "200000";
+            this.maxInteracoes.Text = "100000";
             this.maxInteracoes.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label77
@@ -1152,33 +1150,12 @@
             this.label77.TabIndex = 25;
             this.label77.Text = "Máximo de Interações:";
             // 
-            // familias
-            // 
-            this.familias.Location = new System.Drawing.Point(336, 453);
-            this.familias.Name = "familias";
-            this.familias.Size = new System.Drawing.Size(100, 20);
-            this.familias.TabIndex = 28;
-            this.familias.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label2.Location = new System.Drawing.Point(318, 428);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(134, 17);
-            this.label2.TabIndex = 27;
-            this.label2.Text = "Famílias da Solução";
-            // 
             // Interface
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Teal;
             this.ClientSize = new System.Drawing.Size(487, 524);
-            this.Controls.Add(this.familias);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.maxInteracoes);
             this.Controls.Add(this.label77);
             this.Controls.Add(this.solucaoEncontrada);
@@ -1307,8 +1284,6 @@
         private System.Windows.Forms.Label label76;
         private System.Windows.Forms.TextBox maxInteracoes;
         private System.Windows.Forms.Label label77;
-        private System.Windows.Forms.TextBox familias;
-        private System.Windows.Forms.Label label2;
     }
 }
 

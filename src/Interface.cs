@@ -120,6 +120,7 @@ namespace OitoRainhasAlgoritmosGeneticos
                     resetarMatrizSolucao("?");
                     interacoesFinal.Text = "" + metodos.maxInteracoes;
                     solucaoEncontrada.Text = "Nenhuma";
+                    familias.Text = "Nenhuma";
                 }
             }
         }
@@ -133,9 +134,14 @@ namespace OitoRainhasAlgoritmosGeneticos
             prob3.Text = "0.50";
             inter3.Text = "2000";
             reset.Text = "5000";
+<<<<<<< HEAD
             maxInteracoes.Text = "100000";
+=======
+            maxInteracoes.Text = "300000";
+>>>>>>> origin/master
             interacoesFinal.Text = "";
             solucaoEncontrada.Text = "";
+            familias.Text = "";
             resetarMatrizSolucao("-");
         }
 

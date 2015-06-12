@@ -55,11 +55,17 @@ namespace OitoRainhasAlgoritmosGeneticos
             melhorIndividuo = "";
         }
 
+        private static List<String> populacao;
+
         /* Inicia a busca pela solução das 8 rainhas a partir de um algoritmo genético */
         public void iniciarInteracoes()
         {
             // Sorteia a primeira população com 10 indivíduos.
+<<<<<<< HEAD
             reiniciar();
+=======
+            populacao = new List<String>();
+>>>>>>> origin/master
             populacao = sortearPopulacao(populacao);
 
             // Percorre o número máximo de interações.
@@ -82,7 +88,7 @@ namespace OitoRainhasAlgoritmosGeneticos
                     melhorFitness = fitness;
                     melhorIndividuo = melhorIndividuoPopulacao;
                     probabilidadeAtual = probabilidade_1;
-                    numInteracoesAux = 0;
+                    //numInteracoesAux = 0;
                 }
 
                 // Condições de probabilidades de mutação a partir do número de interações escolhidas.
@@ -136,8 +142,13 @@ namespace OitoRainhasAlgoritmosGeneticos
             }
 
             // Agora adiciona os 2 melhores indivíduos da população anterior.
+<<<<<<< HEAD
             int[] posMelhores = new int[] { 0, 1 };
             int[] fitnessMelhores = new int[] { listFitness[0], listFitness[1] };
+=======
+            int[] posMelhores = new int[]{ 0, 1 };
+            int[] fitnessMelhores = new int[] { getFitness(populacao[0]), getFitness(populacao[1]) };
+>>>>>>> origin/master
             for (int i = 2; i < populacao.Count; i++)
             {
                 if (fitnessMelhores[0] > fitnessMelhores[1])
@@ -157,6 +168,7 @@ namespace OitoRainhasAlgoritmosGeneticos
                     }
                 }
             }
+<<<<<<< HEAD
 
             // Depois procura a posição do melhor fitness.
             // E ao mesmo tempo procura os 2 piores para remover.
@@ -168,6 +180,25 @@ namespace OitoRainhasAlgoritmosGeneticos
             {
                 // Busca o melhor
                 if (novosFitness[i] > fitness_melhor)
+=======
+            
+            // Guarda os fitness da nova população.
+            int[] arrayFitness = new int[novaPopulacao.Count];
+            int maiorFitness = getFitness(novaPopulacao[0]);
+            for (int i = 0; i < novaPopulacao.Count; i++)
+                arrayFitness[i] = getFitness(novaPopulacao[i]);
+
+            // Depois compara os fitness para escolher o melhor.
+            // E ao mesmo tempo procura os 2 piores para remover.
+            int fitness_melhor = arrayFitness[0];
+            int pos_melhor = 0;
+            int[] fitnessPiores = new int[] { arrayFitness[0], arrayFitness[1] };
+            int[] posPiores = new int[] { 0, 1 };
+            for (int i = 1; i < arrayFitness.Length; i++)
+            {
+                // Busca o melhor
+                if (arrayFitness[i] > fitness_melhor)
+>>>>>>> origin/master
                 {
                     fitness_melhor = novosFitness[i];
                     pos_melhor = i;
@@ -175,17 +206,29 @@ namespace OitoRainhasAlgoritmosGeneticos
                 // Busca os piores.
                 if (fitnessPiores[0] < fitnessPiores[1])
                 {
+<<<<<<< HEAD
                     if (novosFitness[i] < fitnessPiores[0])
                     {
                         fitnessPiores[0] = novosFitness[i];
+=======
+                    if (arrayFitness[i] < fitnessPiores[0])
+                    {
+                        fitnessPiores[0] = arrayFitness[i];
+>>>>>>> origin/master
                         posPiores[0] = i;
                     }
                 }
                 else
                 {
+<<<<<<< HEAD
                     if (novosFitness[i] < fitnessPiores[1])
                     {
                         fitnessPiores[1] = novosFitness[i];
+=======
+                    if (arrayFitness[i] < fitnessPiores[1])
+                    {
+                        fitnessPiores[1] = arrayFitness[i];
+>>>>>>> origin/master
                         posPiores[1] = i;
                     }
                 }
@@ -198,9 +241,13 @@ namespace OitoRainhasAlgoritmosGeneticos
             else
                 novaPopulacao.RemoveAt(posPiores[1]);
             // A população atual passa a ser a nova população.
+<<<<<<< HEAD
 
             populacao = novaPopulacao;
             listFitness = novosFitness;
+=======
+            populacao = novaPopulacao;
+>>>>>>> origin/master
             // Retorna o melhor indivíduo.
             return melhor;
         }

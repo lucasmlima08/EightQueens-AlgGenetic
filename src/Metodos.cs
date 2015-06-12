@@ -9,35 +9,36 @@ namespace OitoRainhasAlgoritmosGeneticos
     class Metodos
     {
         private static Random random = new Random();
-
+        // Condições de solução.
         public Boolean encontrouSolucao = false;
         public String solucao = "";
-
+        // Número de rainhas no tabuleiro e indivíduos na população.
         public int nRainhas = 8;
-
-        public int maxInteracoes = 0;
-        public int interacoes = 0;
-        public int numInteracoesAux = 0;
-
+        private int nPopulacao = 10;
+        // Condições de Interações do algoritmo.
+        public int maxInteracoes = 0; // Máximo de interações permitidas.
+        public int interacoes = 0; // Número de interações até o momento.
+        public int numInteracoesAux = 0; // Número de interações desde a geração da população inicial.
+        public int reset = 0; // Máximo de interações para desconsiderar a população atual.
+        // Probabilidade de Mutação 1.
         public float probabilidade_1 = 0.0f;
         public int numInteracoes_1 = 0;
-
+        // Probabilidade de Mutação 2.
         public float probabilidade_2 = 0.0f;
         public int numInteracoes_2 = 0;
-
+        // Probabilidade de Mutação 3.
         public float probabilidade_3 = 0.0f;
         public int numInteracoes_3 = 0;
-
+        // Probabilidade de mutação atual.
         public float probabilidadeAtual = 0;
-
+        // Melhor fitness e melhor indivíduo encontrado até o momento em todas as populações.
         public int melhorFitness = 0;
         public String melhorIndividuo = "";
+        // Condições da população atual.
+        private List<String> populacao = new List<String>(); // População atual.
+        private List<int> listFitness = new List<int>(); // Array com o fitness de todos os indivíduos da população atual.
 
-        public int reset = 0;
-
-        private List<String> populacao = new List<String>();
-        private List<int> listFitness = new List<int>();
-
+        /* Reinicia os atributos principais */
         public void reiniciar()
         {
             populacao.Clear();
@@ -58,8 +59,9 @@ namespace OitoRainhasAlgoritmosGeneticos
         /* Inicia a busca pela solução das 8 rainhas a partir de um algoritmo genético */
         public void iniciarInteracoes()
         {
-            // Sorteia a primeira população com 10 indivíduos.
             reiniciar();
+            // Sorteia a primeira população com N=10 indivíduos.
+            // E guarda o fitness de seus indivíduos.
             populacao = sortearPopulacao(populacao);
 
             // Percorre o número máximo de interações.
@@ -68,6 +70,7 @@ namespace OitoRainhasAlgoritmosGeneticos
                 // Seleciona o melhor indivíduo da população de acordo com o algoritmo genético.
                 String melhorIndividuoPopulacao = algorimoGenetico(populacao);
                 int fitness = getFitness(melhorIndividuoPopulacao);
+                
                 // Verifica se encontrou uma solução.
                 if (fitness == nRainhas)
                 {
@@ -190,17 +193,20 @@ namespace OitoRainhasAlgoritmosGeneticos
                     }
                 }
             }
+            
             // Pega o melhor indivíduo da nova população.
             String melhor = novaPopulacao[pos_melhor];
+            
             // Remove os 2 piores (maior indice primeiro).
             if (posPiores[0] > posPiores[1])
                 novaPopulacao.RemoveAt(posPiores[0]);
             else
                 novaPopulacao.RemoveAt(posPiores[1]);
+                
             // A população atual passa a ser a nova população.
-
             populacao = novaPopulacao;
             listFitness = novosFitness;
+            
             // Retorna o melhor indivíduo.
             return melhor;
         }
@@ -276,7 +282,7 @@ namespace OitoRainhasAlgoritmosGeneticos
         /* Gera uma população de 10 indivíduos */
         private List<String> sortearPopulacao(List<String> populacao)
         {
-            while (populacao.Count < 10) // Para população com 10 indivíduos.
+            while (populacao.Count < nPopulacao)
             {
                 String individuo = getIndividuoAleatorio(nRainhas);
                 int fitness = getFitness(individuo);
